@@ -11,11 +11,11 @@ import OAuth from '../components/OAuth';
 function SignUp() {
     const [showPassword, setShowPassword] = useState(false)
     const [formData, setFormData] = useState({
-        title: '',
+        name: '',
         email: '',
         password: '',
     })
-    const { title, email, password } = formData
+    const { name, email, password } = formData
     
     const navigate = useNavigate()
 
@@ -37,7 +37,7 @@ function SignUp() {
             const user = userCredential.user
 
             updateProfile(auth.currentUser, {
-                displayName: title
+                displayName: name
             })
 
             const formDataCopy = { ...formData }
@@ -64,8 +64,8 @@ function SignUp() {
                         type="text" 
                         className="nameInput" 
                         placeholder="Name" 
-                        id="title"
-                        value={title}
+                        id="name"
+                        value={name}
                         onChange={onChange}
                     />
                     <input 

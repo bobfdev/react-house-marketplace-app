@@ -11,11 +11,11 @@ function Profile() {
     const auth = getAuth()
     const [changeDetails, setChangeDetails] = useState(false)
     const [formData, setFormData] = useState({
-        title: auth.currentUser.displayName,
+        name: auth.currentUser.displayName,
         email: auth.currentUser.email
     })
 
-    const { title, email } = formData
+    const { name, email } = formData
 
     const navigate = useNavigate()
 
@@ -26,16 +26,16 @@ function Profile() {
   
     const onSubmit = async () => {
         try {
-            if (auth.currentUser.displayName !== title) {
+            if (auth.currentUser.displayName !== name) {
                 // Update display name in firebase
                 await updateProfile(auth.currentUser, {
-                    displayName: title
+                    displayName: name
                 })
 
                 // Update in firestore
                 const userRef = doc(db, 'users', auth.currentUser.uid)
                 await updateDoc(userRef, {
-                    title
+                    name
                 })
             }
         } catch (error) {
@@ -77,10 +77,10 @@ function Profile() {
                     <form>
                         <input 
                             type="text" 
-                            id="title" 
+                            id="name" 
                             className={!changeDetails ? 'profileName' : 'profileNameActive'}
                             disabled={!changeDetails}
-                            value={title}
+                            value={name}
                             onChange={onChange}
                         />
                         <input 
